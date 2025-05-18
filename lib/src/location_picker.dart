@@ -467,7 +467,12 @@ class _FlutterLocationPickerState extends State<FlutterLocationPicker>
     };
     queryParameters.addAll(widget.nominatimAdditionalQueryParameters ?? {});
     var uri = Uri.https(widget.nominatimHost, '/reverse', queryParameters);
-    var response = await client.get(uri);
+    var response = await client.get(
+      uri,
+      headers: {
+        'User-Agent': 'pacepack.app (daniel.heily@gmail.com)', // Add your own contact info
+      },
+    );
     var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes));
     String displayName = "This Location is not accessible";
     Map<String, dynamic> address;
