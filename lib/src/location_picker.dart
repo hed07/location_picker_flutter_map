@@ -470,7 +470,7 @@ class _FlutterLocationPickerState extends State<FlutterLocationPicker>
     var response = await client.get(
       uri,
       headers: {
-        'User-Agent': 'pacepack.app (daniel.heily@gmail.com)', // Add your own contact info
+        'User-Agent': 'pacepack.app (daniel.heily@gmail.com)',
       },
     );
     var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes));
@@ -660,7 +660,12 @@ class _FlutterLocationPickerState extends State<FlutterLocationPicker>
                     try {
                       String url =
                           'https://${widget.nominatimHost}/search?q=$value&format=json&polygon_geojson=1&addressdetails=1&accept-language=${widget.mapLanguage}${widget.countryFilter != null ? '&countrycodes=${widget.countryFilter}' : ''}';
-                      var response = await client.get(Uri.parse(url));
+                      var response = await client.get(
+                        Uri.parse(url),
+                        headers: {
+                          'User-Agent': 'pacepack.app (daniel.heily@gmail.com)',
+                        },
+                      );
                       var decodedResponse =
                           jsonDecode(utf8.decode(response.bodyBytes))
                               as List<dynamic>;
