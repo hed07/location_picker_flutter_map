@@ -428,7 +428,7 @@ class _FlutterLocationPickerState extends State<FlutterLocationPicker>
   ///   longitude (double): The longitude parameter represents the current longitude coordinate of the
   /// location.
   ///  address (String): The address parameter represents the current address of the location.
-  void onLocationChanged({required latLng, String? address}) {
+  Future<void> onLocationChanged({required latLng, String? address}) async {
     pickData(latLng).then(
       (PickedData pickedData) {
         if (widget.onChanged != null) widget.onChanged!(pickedData);
@@ -499,7 +499,7 @@ class _FlutterLocationPickerState extends State<FlutterLocationPicker>
   }
 
   @override
-  void initState() {
+  void initState() async {
     _mapController = MapController();
     _animationController =
         AnimationController(duration: widget.mapAnimationDuration, vsync: this);
@@ -540,7 +540,7 @@ class _FlutterLocationPickerState extends State<FlutterLocationPicker>
         ),
       );
     } else {
-      onLocationChanged(latLng: initPosition);
+      await onLocationChanged(latLng: initPosition);
       setState(() {
         isLoading = false;
       });
