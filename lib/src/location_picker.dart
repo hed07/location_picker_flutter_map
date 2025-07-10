@@ -249,6 +249,8 @@ class FlutterLocationPicker extends StatefulWidget {
   ///  example: [PolylineLayerWidget(polyline: Polyline(points: points, color: Colors.red))]
   final List<Widget> mapLayers;
 
+  final String userAgent;
+
   const FlutterLocationPicker({
     super.key,
     required this.onPicked,
@@ -308,6 +310,7 @@ class FlutterLocationPicker extends StatefulWidget {
     this.mapLayers = const [],
     Widget? loadingWidget,
     this.selectLocationButtonLeadingIcon,
+    required this.userAgent,
   }) : loadingWidget = loadingWidget ?? const CircularProgressIndicator();
 
   @override
@@ -786,7 +789,8 @@ class _FlutterLocationPickerState extends State<FlutterLocationPicker>
           TileLayer(
             urlTemplate: widget.urlTemplate,
             subdomains: const ['a', 'b', 'c'],
-            tileProvider: CancellableNetworkTileProvider(),
+            tileProvider: NetworkTileProvider()
+              ..headers['User-Agent'] = widget.userAgent,
           ),
           if (widget.showCurrentLocationPointer) _buildCurrentLocation(),
           ...widget.mapLayers,
