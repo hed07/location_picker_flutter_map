@@ -663,7 +663,7 @@ class _FlutterLocationPickerState extends State<FlutterLocationPicker>
                       var response = await client.get(
                         Uri.parse(url),
                         headers: {
-                          'User-Agent': 'pacepack.app (daniel.heily@gmail.com)',
+                          'User-Agent': 'pacepack-app/1.0.0 (+https://pacepack.app; daniel.heily@gmail.com)',
                         },
                       );
                       var decodedResponse =
